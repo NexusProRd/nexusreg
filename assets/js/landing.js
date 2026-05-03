@@ -179,7 +179,7 @@
     function showSuccessModalAutoInstalacion(result, nombreTienda) {
         if (!Elements.modalTitle || !Elements.resultMessage) return;
 
-        const tiendaUrl = nombreTienda ? nombreTienda.toLowerCase().replace(/\s+/g, '-') : '';
+        const tiendaUrl = nombreTienda ? encodeURIComponent(nombreTienda.toLowerCase().replace(/\s+/g, '-')) : '';
         
         Elements.modalTitle.textContent = '🚀 ¡Tu Tienda está Lista!';
         Elements.resultMessage.innerHTML = `

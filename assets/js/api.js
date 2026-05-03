@@ -853,6 +853,7 @@ async function autoInstalarClienteAPI(datos) {
 
         const payload = {
             nombre: datos.nombre.trim(),
+            propietario: datos.propietario ? datos.propietario.trim() : '',
             pin: datos.pin.trim(),
             email: datos.email ? datos.email.trim() : '',
             whatsapp: datos.whatsapp ? datos.whatsapp.trim() : ''

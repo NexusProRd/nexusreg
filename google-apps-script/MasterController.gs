@@ -1265,8 +1265,8 @@ function enviarEmailBienvenida(destinatario, nombreTienda, shopId, token, pin) {
       return;
     }
 
-    var linkTienda = 'https://nexusprord.github.io/testnexuspro/?s=' + shopId;
-    var linkPanel = 'https://nexusprord.github.io/testnexuspro/admin.html?s=' + nombreTienda;
+    var linkTienda = 'https://nexusprord.github.io/testnexuspro/?s=' + encodeURIComponent(nombreTienda);
+    var linkPanel = 'https://nexusprord.github.io/testnexuspro/admin.html?s=' + encodeURIComponent(nombreTienda);
 
     var asunto = '🚀 ¡Bienvenido a Nexus Pro! Tu tienda ' + nombreTienda + ' está lista';
     
