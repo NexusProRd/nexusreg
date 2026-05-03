@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nexus Pro - Únete a la plataforma de gestión de tiendas">
+    <title>Nexus Pro | Únete Ahora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <!-- LANDING PAGE PÚBLICA - ONBOARDING -->
+    <div class="landing-container">
+        <!-- COLUMNA IZQUIERDA - INFORMACIÓN -->
+        <div class="landing-info">
+            <div class="landing-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">NEXUS PRO</span>
+            </div>
+            
+            <div class="landing-content">
+                <h1 class="landing-title">Tu tienda en WhatsApp lista en <span class="highlight">60 segundos</span></h1>
+                <p class="landing-subtitle">La plataforma SaaS más rápida para crear tu tienda online y vender por WhatsApp sin complicaciones</p>
+                
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Define tu Marca</h3>
+                            <p>Elige un nombre único y nosotros creamos tu base de datos inteligente al instante</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Personaliza tu Catálogo</h3>
+                            <p>Sube productos y configura tus precios de forma sencilla y rápida</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>¡Empieza a Vender!</h3>
+                            <p>Tu tienda lista para recibir pedidos por WhatsApp y gestionar ventas en tiempo real</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="landing-features">
+                    <div class="feature">
+                        <span class="feature-icon">🔒</span>
+                        <span>Datos seguros en Google</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">⚡</span>
+                        <span>Sincronización en tiempo real</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">📊</span>
+                        <span>Dashboard completo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COLUMNA DERECHA - FORMULARIO -->
+        <div class="landing-form">
+            <div class="form-card">
+                <h2>Crear mi Tienda</h2>
+                <p class="form-description">Completa los datos y nosotros hacemos el resto</p>
+                
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="reg-name">Nombre de tu Tienda</label>
+                        <input type="text" id="reg-name" required placeholder="Mi Tienda Online">
+                        <span class="form-hint">El nombre que aparecerá en tu panel</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-whatsapp">WhatsApp</label>
+                        <input type="tel" id="reg-whatsapp" required placeholder="+1 (829) 000-0000">
+                        <span class="form-hint">Número con código de país para pedidos</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-pin">PIN de Seguridad</label>
+                        <div class="input-with-icon">
+                            <input type="password" id="reg-pin" required placeholder="••••" maxlength="6" minlength="4">
+                            <button type="button" class="toggle-pin" onclick="togglePinVisibility()">👁️</button>
+                        </div>
+                        <span class="form-hint">Código de 4-6 dígitos para acceder a tu panel</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-email">Email *</label>
+                        <input type="email" id="reg-email" required placeholder="correo@ejemplo.com">
+                        <span class="form-hint">Para notificaciones y recuperación de cuenta</span>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-submit">
+                        <span class="btn-icon">🚀</span>
+                        Crear mi Tienda
+                    </button>
+                    <div id="sugerencias-container"></div>
+                </form>
+                
+                <div class="form-note">
+                    <p>⚡ Te creamos tu Google Sheet automáticamente</p>
+                    <p>🔒 Tus datos están seguros</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TOAST NOTIFICATIONS -->
+    <div class="toast-container" id="toast-container"></div>
+    
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Resultado del Registro</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="registration-result">
+                    <div class="result-icon" style="font-size: 48px;">⚡</div>
+                    <p id="result-message">Procesando tu solicitud...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="modal-cancel">Cerrar</button>
+                <button class="btn-primary" id="modal-confirm">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/landing.js"></script>
+
+    <!-- TUTORIAL MODAL - GOOGLE SHEET SETUP -->
+    <div class="sheet-tutorial-overlay" id="sheet-tutorial-overlay">
+        <div class="sheet-tutorial-modal">
+            <div class="sheet-tutorial-header">
+                <div class="sheet-tutorial-title">
+                    <span class="sheet-tutorial-title-icon">📋</span>
+                    Configurar Google Sheet
+                </div>
+                <button class="sheet-tutorial-close" id="sheet-tutorial-close">✕</button>
+            </div>
+
+            <div class="sheet-tutorial-progress">
+                <div class="sheet-tutorial-dot active" data-step="1"></div>
+                <div class="sheet-tutorial-dot" data-step="2"></div>
+                <div class="sheet-tutorial-dot" data-step="3"></div>
+                <div class="sheet-tutorial-dot" data-step="4"></div>
+                <div class="sheet-tutorial-dot" data-step="5"></div>
+            </div>
+
+            <div class="sheet-tutorial-body">
+                <!-- Paso 1: Tu Base de Datos -->
+                <div class="sheet-tutorial-step active" data-step="1">
+                    <div class="sheet-step-header">
+                        <span class="sheet-step-icon">📊</span>
+                        <h3 class="sheet-step-title">Tu Base de Datos</h3>
+                    </div>
+                    <p class="sheet-step-desc">
+                        Primero, necesitas tu propia hoja de cálculo. Haz clic en el botón de abajo para abrir una nueva en blanco.
+                    </p>
+                    <a href="https://sheets.new" target="_blank" class="sheet-step-btn">
+                        ➕ Crear Nueva Hoja
+                    </a>
+                    <p class="sheet-step-hint">
+                        Se abrirá una hoja de cálculo nueva en otra pestaña
+                    </p>
+                </div>
+
+                <!-- Paso 2: El Botón Mágico -->
+                <div class="sheet-tutorial-step" data-step="2">
+                    <div class="sheet-step-header">
+                        <span class="sheet-step-icon">🔴</span>
+                        <h3 class="sheet-step-title">El Botón Mágico</h3>
+                    </div>
+                    <p class="sheet-step-desc">
+                        Una vez abierta tu hoja, busca el botón verde que dice <strong>"Compartir"</strong> en la esquina superior derecha.
+                    </p>
+                    <div class="sheet-step-visual">
+                        <div class="visual-placeholder">
+                            <span class="visual-icon">🔘</span>
+                            <span class="visual-text">Botón "Compartir"<br><small>(esquina superior derecha)</small></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paso 3: Abrir la Llave -->
+                <div class="sheet-tutorial-step" data-step="3">
+                    <div class="sheet-step-header">
+                        <span class="sheet-step-icon">🔓</span>
+                        <h3 class="sheet-step-title">Abrir la Llave</h3>
+                    </div>
+                    <p class="sheet-step-desc">
+                        En la ventanita que aparece, busca donde dice <strong>"Restringido"</strong> y cámbialo por <strong>"Cualquier usuario que tenga el vínculo"</strong>.
+                    </p>
+                    <div class="sheet-step-visual">
+                        <div class="visual-placeholder">
+                            <span class="visual-icon">🔗</span>
+                            <span class="visual-text">Restringido →<br><strong>Cualquier usuario con el vínculo</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paso 4: Permiso de Escritura -->
+                <div class="sheet-tutorial-step" data-step="4">
+                    <div class="sheet-step-header">
+                        <span class="sheet-step-icon">✏️</span>
+                        <h3 class="sheet-step-title">Permiso de Escritura</h3>
+                    </div>
+                    <p class="sheet-step-desc">
+                        ¡Casi listo! Al lado de donde dice <strong>"Lector"</strong>, haz clic y cámbialo a <strong>"Editor"</strong>. Si no haces esto, tu tienda no podrá recibir pedidos.
+                    </p>
+                    <div class="sheet-step-alert">
+                        ⚠️ ¡No olvides ponerlo como <strong>EDITOR</strong>!
+                    </div>
+                    <div class="sheet-step-visual">
+                        <div class="visual-placeholder success">
+                            <span class="visual-icon">✅</span>
+                            <span class="visual-text">Lector → <strong>Editor</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paso 5: Copiar y Pegar -->
+                <div class="sheet-tutorial-step" data-step="5">
+                    <div class="sheet-step-header">
+                        <span class="sheet-step-icon">📋</span>
+                        <h3 class="sheet-step-title">Copiar y Pegar</h3>
+                    </div>
+                    <p class="sheet-step-desc">
+                        Ahora copia el enlace que aparece arriba en tu navegador, regresa aquí y pégalo en el formulario de registro.
+                    </p>
+                    <div class="sheet-step-visual">
+                        <div class="visual-placeholder">
+                            <span class="visual-icon">🔗</span>
+                            <span class="visual-text">Copia la URL de la barra de direcciones<br><code style="font-size: 11px;">docs.google.com/spreadsheets/d/...</code></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-tutorial-footer">
+                <button class="sheet-tutorial-btn secondary" id="tutorial-prev" disabled>
+                    ← Atrás
+                </button>
+                <button class="sheet-tutorial-btn primary" id="tutorial-next">
+                    Siguiente →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script del tutorial - 直接 en HTML -->
+    <script>
+    (function() {
+        var helpBtn = document.getElementById('btn-help-sheet');
+        var tutorialOverlay = document.getElementById('sheet-tutorial-overlay');
+        var tutorialClose = document.getElementById('sheet-tutorial-close');
+        var tutorialPrev = document.getElementById('tutorial-prev');
+        var tutorialNext = document.getElementById('tutorial-next');
+        
+        var currentStep = 1;
+        var totalSteps = 5;
+        
+        console.log('Tutorial init - helpBtn:', helpBtn);
+        
+        if (helpBtn) {
+            helpBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Clicked help button');
+                if (tutorialOverlay) {
+                    tutorialOverlay.style.display = 'flex';
+                    setTimeout(function() {
+                        tutorialOverlay.classList.add('active');
+                    }, 10);
+                }
+            });
+        }
+        
+        if (tutorialClose) {
+            tutorialClose.addEventListener('click', function() {
+                tutorialOverlay.classList.remove('active');
+                setTimeout(function() {
+                    tutorialOverlay.style.display = 'none';
+                }, 300);
+            });
+        }
+        
+        if (tutorialOverlay) {
+            tutorialOverlay.addEventListener('click', function(e) {
+                if (e.target === tutorialOverlay) {
+                    tutorialOverlay.classList.remove('active');
+                    setTimeout(function() {
+                        tutorialOverlay.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+        
+        if (tutorialPrev) {
+            tutorialPrev.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateTutorialSteps();
+                }
+            });
+        }
+        
+        if (tutorialNext) {
+            tutorialNext.addEventListener('click', function() {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateTutorialSteps();
+                } else {
+                    tutorialOverlay.classList.remove('active');
+                    setTimeout(function() {
+                        tutorialOverlay.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+        
+        function updateTutorialSteps() {
+            var dots = document.querySelectorAll('.sheet-tutorial-dot');
+            var steps = document.querySelectorAll('.sheet-tutorial-step');
+            
+            dots.forEach(function(dot, index) {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                }
+            });
+            
+            steps.forEach(function(step, index) {
+                step.classList.remove('active');
+                if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+            
+            tutorialPrev.disabled = currentStep === 1;
+            tutorialNext.textContent = currentStep === totalSteps ? '¡Listo! ✓' : 'Siguiente →';
+        }
+    })();
+    </script>
+</body>
+</html>
