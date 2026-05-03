@@ -1255,19 +1255,21 @@ filteredClients.forEach(function(client) {
         }
     }
 
-    /**
-     * Registra un nuevo cliente (auto-instalación)
-     */
+/**
+      * Registra un nuevo cliente (auto-instalación)
+      */
     async function autoInstalarCliente() {
         console.log('🔔 autoInstalarCliente() llamado');
         
         const nombreInput = document.getElementById('new-shop-name');
         const nombre = nombreInput?.value.trim();
+        const propietario = document.getElementById('new-shop-owner')?.value.trim();
         const pin = document.getElementById('new-shop-pin')?.value.trim();
         const email = document.getElementById('new-shop-email')?.value.trim();
         const whatsapp = document.getElementById('new-shop-whatsapp')?.value.trim();
 
         if (!nombre) return showToast('El nombre del negocio es requerido', 'error');
+        if (!propietario) return showToast('El nombre del propietario es requerido', 'error');
         if (!pin) return showToast('El PIN es requerido', 'error');
         if (!email) return showToast('El email es requerido', 'error');
 
@@ -1288,6 +1290,7 @@ filteredClients.forEach(function(client) {
             
             const resultado = await window.API.autoInstalarCliente({
                 nombre: nombre,
+                propietario: propietario,
                 pin: pin,
                 email: email,
                 whatsapp: whatsapp

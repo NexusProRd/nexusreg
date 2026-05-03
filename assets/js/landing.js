@@ -62,11 +62,12 @@
         e.preventDefault();
 
         const nombre = document.getElementById('reg-name')?.value.trim();
+        const propietario = document.getElementById('reg-owner')?.value.trim();
         const whatsapp = document.getElementById('reg-whatsapp')?.value.trim();
         const pin = document.getElementById('reg-pin')?.value.trim();
         const email = document.getElementById('reg-email')?.value.trim();
 
-        if (!nombre || !whatsapp || !pin || !email) {
+        if (!nombre || !propietario || !whatsapp || !pin || !email) {
             showToast('Por favor, completa todos los campos requeridos', 'error');
             return;
         }
@@ -88,6 +89,7 @@
         try {
             const result = await window.API.autoInstalarCliente({
                 nombre: nombre,
+                propietario: propietario,
                 whatsapp: whatsapp,
                 pin: pin,
                 email: email
